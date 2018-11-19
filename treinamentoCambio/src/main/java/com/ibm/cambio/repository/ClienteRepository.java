@@ -1,7 +1,8 @@
 package com.ibm.cambio.repository;
-import com.ibm.cambio.model.Cliente;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.jpa.*;
+
+import com.ibm.cambio.model.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {

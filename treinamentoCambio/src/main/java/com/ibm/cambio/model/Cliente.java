@@ -1,7 +1,6 @@
 package com.ibm.cambio.model;
 
 import java.util.List;
-import antlr.collections.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +29,7 @@ public class Cliente {
     @JsonIgnore
     private List<Conta> contas;
 
-    public Long getId() {
+    /*public Long getId() {
         return id;
     }
 
@@ -47,5 +46,5 @@ public class Cliente {
     }
 
     public Cliente() {
-    }
+    }*/
 }

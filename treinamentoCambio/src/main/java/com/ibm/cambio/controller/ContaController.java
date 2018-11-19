@@ -2,6 +2,9 @@ package com.ibm.cambio.controller;
 import com.ibm.cambio.model.Conta;
 import com.ibm.cambio.repository.ClienteRepository;
 import com.ibm.cambio.repository.ContaRepository;
+
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +23,7 @@ public class ContaController {
     }
 
     @RequestMapping(value ="/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Conta> buscaConta(@PathVariable Conta conta){
+    public ResponseEntity<Conta> buscaConta(@PathVariable Long id){
         Optional<Conta> contaOptional = contaRepository.findById(id);
         return contaOptional.isPresent() ? ResponseEntity.ok(contaOptional.get()) :
                 ResponseEntity.notFound().build();

@@ -1,5 +1,6 @@
 package com.ibm.cambio.controller;
 
+import com.ibm.cambio.exception.ObjetoNaoEncontradoException;
 import com.ibm.cambio.model.Cliente;
 import com.ibm.cambio.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ClienteController {
         try {
             Cliente cliente = clienteService.buscarCliente(id);
             return ResponseEntity.ok(new Resposta(0, "", cliente));
-        } catch (ObjetoNaoEcontratoException e) {
+        } catch (ObjetoNaoEncontradoException e) {
             return ResponseEntity.badRequest().body(new Resposta(e.getCode(), e.getMessage(), null)); }
     }
 

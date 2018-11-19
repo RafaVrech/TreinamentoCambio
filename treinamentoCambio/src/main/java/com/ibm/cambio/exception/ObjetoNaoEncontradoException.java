@@ -2,9 +2,13 @@ package com.ibm.cambio.exception;
 
 public class ObjetoNaoEncontradoException extends RuntimeException{
 
-    private Integer code = 1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer code = 1;
 
-    public ObjetoNaoEcontratoException(String message) {
+    public ObjetoNaoEncontradoException(String message) {
         super(message);
     }
 
