@@ -21,11 +21,36 @@ public class Conta {
     private Long id;
     private Short agencia;
     private String numero;
+    private Double saldo;
     private String tipoConta;
 
     @ManyToOne(targetEntity = Cliente.class)
         private Cliente cliente;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
+    }
+
+    public String getTipoConta() {
+        return tipoConta;
+    }
+
+    public void setTipoConta(String tipoConta) {
+        this.tipoConta = tipoConta;
+    }
 
     public Short getAgencia() {
         return agencia;
