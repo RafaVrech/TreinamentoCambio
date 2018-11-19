@@ -28,6 +28,7 @@ public class Conta {
     private String numero;
     private Double saldo;
     private String tipoConta;
+    private Moeda tipoMoeda;
 
     @ManyToOne(targetEntity = Cliente.class)
     private Cliente cliente;
