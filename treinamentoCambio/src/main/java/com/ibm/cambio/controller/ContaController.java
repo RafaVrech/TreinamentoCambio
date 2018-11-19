@@ -1,28 +1,62 @@
 package com.ibm.cambio.controller;
-import com.ibm.cambio.model.Conta;
-import com.ibm.cambio.repository.ClienteRepository;
-import com.ibm.cambio.repository.ContaRepository;
-
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ibm.cambio.model.Conta;
+import com.ibm.cambio.service.ContaService;
 
 @RestController
 @RequestMapping("/conta")
 public class ContaController {
-    private ContaRepository contaRepository;
-    private ClienteRepository clienteRepository;
+    private ContaService contaService;
 
     @Autowired
-    public ContaController(ContaRepository contaRepository,
-                           ClienteRepository clienteRepository) {
-        this.contaRepository = contaRepository;
-        this.clienteRepository = clienteRepository;
+    public ContaController(ContaService contaService) {
+        this.contaService = contaService;
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Object> buscarConta(@PathVariable Long id) 
+    {
+        return ResponseEntity.ok(new Resposta(0, "", contaService.buscarConta(id)));
     }
 
-    @RequestMapping(value ="/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public ResponseEntity<Object> buscaTodasConta(
+							@RequestParam(value = "filtro", required = false) String filtro) 
+    {
+        return ResponseEntity.ok(new Resposta(0, "", contaService.buscarTodasConta(filtro)));
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Object> novaConta(@RequestBody Conta conta) 
+    {
+        return ResponseEntity.ok(new Resposta(0, "", contaService.salvarConta(conta)));
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.PATCH)
+    public ResponseEntity<Object> updateConta(@RequestBody Conta conta) 
+    {
+        return ResponseEntity.ok(new Resposta(0, "", contaService.atualizarConta(conta)));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteConta(@PathVariable Long id) 
+    {
+       contaService.deletarConta(id);
+       return ResponseEntity.ok(new Resposta(0, "", "Conta removido com sucesso!")); 
+    }
+    
+    
+    
+
+    /*@RequestMapping(value ="/{id}", method = RequestMethod.GET)
     public ResponseEntity<Conta> buscaConta(@PathVariable Long id){
         Optional<Conta> contaOptional = contaRepository.findById(id);
         return contaOptional.isPresent() ? ResponseEntity.ok(contaOptional.get()) :
@@ -59,5 +93,5 @@ public class ContaController {
 
         contaRepository.deleteById(id);
         return ResponseEntity.ok("Conta removida com sucesso!");
-    }
+    }*/
 }
