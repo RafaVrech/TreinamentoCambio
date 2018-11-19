@@ -1,24 +1,34 @@
 package com.ibm.cambio.model;
 
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
 
 
 @Data
 @Entity
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cliente {
     @Id
-    @GeneratedValue(generator="seq_contato", strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(generator="seq_cliente", strategy= GenerationType.SEQUENCE)
     @SequenceGenerator(
             initialValue=1,
             allocationSize=1,
-            name="seq_contato",
-            sequenceName ="seq_contato")
-
+            name="seq_cliente",
+            sequenceName ="seq_cliente")
     private Long id;
     private String nome;
 
@@ -26,25 +36,7 @@ public class Cliente {
             targetEntity = Conta.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    @JsonIgnore
+    
     private List<Conta> contas;
 
-    /*public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Cliente() {
-    }*/
 }
