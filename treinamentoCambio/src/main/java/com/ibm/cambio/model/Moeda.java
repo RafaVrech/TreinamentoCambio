@@ -1,13 +1,13 @@
 package com.ibm.cambio.model;
 
 public enum Moeda {
-	REAL(1), DOLAR(2), EURO(3);
+	REAL(1), DOLAR(3.76), EURO(4.30);
 	
-	private final int valor;
-	Moeda(int valorOpcao){
+	private final double valor;
+	Moeda(double valorOpcao){
 	    valor = valorOpcao;
 	}
-	public int getValor(){
+	public double getValor(){
 	    return valor;
 	}
 }
