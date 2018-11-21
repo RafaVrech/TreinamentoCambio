@@ -59,9 +59,15 @@ public class ContaServiceImpl implements ContaService {
     public ContaView atualizarConta(Conta conta) {
         if (conta == null || conta.getId() == null)
             throw new ParametroInvalidoException("A conta e seu ID são obrigatorios");
-        if (!contaRepository.existsById(conta.getId()))
+        
+        Optional<Conta> retornoBanco = contaRepository.findById(conta.getId());
+        if (!retornoBanco.isPresent())
             throw new ObjetoNaoEncontradoException("Cliente não encontrado");
         
+        Conta contaBanco = retornoBanco.get();
+        if(contaBanco.getTipoMoeda() != conta.getTipoMoeda())
+        	conta.setSaldo(contaBanco.getTipoMoeda().converter(conta.getTipoMoeda(), contaBanco.getSaldo()));
+        	
         //TODO Validar numero da conta pra nao deixar criar outra igual
         
         contaRepository.save(conta);
