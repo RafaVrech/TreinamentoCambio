@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -30,6 +32,7 @@ public class Conta {
     private String tipoConta;
     private Moeda tipoMoeda;
 
+    @JsonBackReference
     @ManyToOne(targetEntity = Cliente.class)
     private Cliente cliente;
 }

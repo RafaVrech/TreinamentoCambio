@@ -1,8 +1,9 @@
 package com.ibm.cambio.service;
-import com.ibm.cambio.model.Conta;
+import com.ibm.cambio.model.Moeda;
+import com.ibm.cambio.view.ContaView;
 
 public interface OperacaoService {
-	Conta Sacar (Conta conta, Double valor);
-	Conta Depositar (Conta conta, Double valor);
-	Conta Transferir (Conta origem, Conta destino, Double valor);	
+	ContaView sacar(Long idConta, Double valor, Moeda moeda);	
+	ContaView depositar (Long idConta, Double valor, Moeda moeda);
+	ContaView transferir (Long idContaOrigem, Long idContaDestino, Double valor, Moeda moeda);
 }

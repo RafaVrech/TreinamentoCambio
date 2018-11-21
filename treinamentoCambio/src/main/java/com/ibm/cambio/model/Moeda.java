@@ -15,9 +15,6 @@ public enum Moeda {
 	
 	public double converter(Moeda moeda, double valor)
 	{
-		if(this == REAL)
-			return valor * moeda.getValor();
-		
-		return REAL.converter(moeda, valor / REAL.getValor());
+		return valor * this.getValor() / moeda.getValor();
 	}
 }

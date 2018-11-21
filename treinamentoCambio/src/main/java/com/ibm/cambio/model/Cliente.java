@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,7 +37,7 @@ public class Cliente {
             targetEntity = Conta.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    
+    @JsonManagedReference
     private List<Conta> contas;
 
 }
