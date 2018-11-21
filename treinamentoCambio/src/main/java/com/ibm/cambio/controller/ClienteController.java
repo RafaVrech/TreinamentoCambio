@@ -1,7 +1,5 @@
 package com.ibm.cambio.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,16 +28,14 @@ public class ClienteController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> buscaCliente(@PathVariable Long id) 
     {
-        Cliente cliente = clienteService.buscarCliente(id);
-        return ResponseEntity.ok(new Resposta(0, "", cliente));
+        return ResponseEntity.ok(new Resposta(0, "", clienteService.buscarCliente(id)));
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<Object> buscaTodosCliente(
 							@RequestParam(value = "filtro", required = false) String filtro) 
     {
-        List<Cliente> contatos = clienteService.buscarTodosCliente(filtro);
-        return ResponseEntity.ok(new Resposta(0, "", contatos));
+        return ResponseEntity.ok(new Resposta(0, "", clienteService.buscarTodosCliente(filtro)));
     }
     
     @RequestMapping(method = RequestMethod.POST)

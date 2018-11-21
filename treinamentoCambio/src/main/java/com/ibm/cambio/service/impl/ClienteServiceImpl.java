@@ -27,7 +27,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente buscarCliente(Long id) {
+    public Cliente buscarCliente(Long id) { //TODO Voltar a view
         Optional<Cliente> clienteOptional = clienteRepository.findById(id);
        
         return clienteOptional.orElseThrow(() -> new ObjetoNaoEncontradoException("Cliente de id \"" + id + "\" não encontrado"));
